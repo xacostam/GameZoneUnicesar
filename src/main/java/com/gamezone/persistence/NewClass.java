@@ -6,7 +6,7 @@ package com.gamezone.persistence;
 
 /**
  *
- * @author User
+ * @author Jose Rodriguez
  */
 public class NewClass {
     
