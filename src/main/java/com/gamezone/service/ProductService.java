@@ -8,6 +8,6 @@ package com.gamezone.service;
  *
  * @author User
  */
-public class NewClass {
+public class ProductService {
     
 }
