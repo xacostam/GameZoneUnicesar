@@ -40,6 +40,20 @@ public class Sale {
     public Seller getSeller() {
         return seller;
     }
+    
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public double calculateTotal() {
+        double total = 0;
+
+        for (Product product : products) {
+            total += product.getPrice();
+        }
+
+        return total;
+    }
 
 }
 
