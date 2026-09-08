@@ -139,26 +139,100 @@ public class ProductService {
 
         return findProduct(id) != null;
     }
+    
+    public boolean updateStock(String id, int newQuantity) {
 
-    /**
-     * Returns the number of registered products.
-     *
-     * @return number of products
-     */
+        if (newQuantity < 0) {
+            System.out.println(
+                    "Stock quantity cannot be negative."
+            );
+
+            return false;
+        }
+
+        Product Product = findProduct(id);
+
+        if (Product == null) {
+
+            System.out.println(
+                    "Product not found."
+            );
+
+            return false;
+        }
+
+        Product.setAvailableQuantity(newQuantity);
+
+        saveProducts();
+
+        return true;
+    }
+
+   
+    public boolean increaseStock(String id, int quantity) {
+
+        if (quantity <= 0) {
+            return false;
+        }
+
+        Product Product = findProduct(id);
+
+        if (Product == null) {
+            return false;
+        }
+
+        int NewQuantity =
+                Product.getAvailableQuantity() + quantity;
+
+        Product.setAvailableQuantity(NewQuantity);
+
+        saveProducts();
+
+        return true;
+    }
+
+   
+    public boolean decreaseStock(String id, int quantity) {
+
+        if (quantity <= 0) {
+            return false;
+        }
+
+        Product Product = findProduct(id);
+
+        if (Product == null) {
+            return false;
+        }
+
+        if (Product.getAvailableQuantity() < quantity) {
+
+            System.out.println(
+                    "Insufficient stock for product: "
+                    + Product.getTitle()
+            );
+
+            return false;
+        }
+
+        int NewQuantity =
+                Product.getAvailableQuantity() - quantity;
+
+        Product.setAvailableQuantity(NewQuantity);
+
+        saveProducts();
+
+        return true;
+    }
+
+  
     public int getProductCount() {
         return products.size();
     }
 
-    /**
-     * Saves current products using the persistence component.
-     */
     public void saveProducts() {
         productPersistence.saveProducts(products);
     }
-
-    /**
-     * Loads products using the persistence component.
-     */
+    
     public void loadProducts() {
         products = productPersistence.loadProducts();
     }
