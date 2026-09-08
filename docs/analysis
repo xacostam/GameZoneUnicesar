@@ -1,0 +1,72 @@
+Sobre las personas del sistema
+
+1) What attributes are common to all people who interact with the store, and which are specific to each type of person? How is this distinction reflected in a class hierarchy?
+
+Common attributes include name, ID, and contact phone number for customers. Specific attributes include email address and purchase history for salespeople, who have an employee code and work shift.
+
+
+2)Should there be a class that represents a "generic person" without specifying their role? Why or why not? What implications does this decision have on the possibility of instantiating such a class?
+
+Yes, because people have common attributes, such as name, identification, and phone number; there must be an abstract class, which prevents it from being instantiated.
+
+
+
+3) What characteristics do all the products sold in the store have in common, regardless of their type? What characteristics are specific to each type of product?
+
+The common characteristics are identifier, title, price, quantity available in stock, and description. The specific characteristics are: for video games: the platform for which they are developed, the genre they belong to, and the recommended age rating; and for consoles: brand, model, and generation.
+
+
+4) Each product type should be able to have a description that includes its specific characteristics. How should this behavior be declared in the base class to ensure that all subclasses implement it in their own way? What object-oriented programming mechanism allows this?
+
+An abstract method should be declared: `public abstract String description();` The object-oriented programming mechanism that allows this is abstraction through abstract classes and methods.
+
+
+
+5) A sale involves a customer, a salesperson, and one or more products. What type of relationships exist between the class representing the sale and the other classes in the system? Are these relationships inheritance, association, composition, or another type? Justify your answer.
+
+There is composition because a sale is composed of a customer, a product, and a salesperson.
+
+
+
+6) Should the sale be responsible for calculating its own total, or should this responsibility fall to another class? Justify your decision.
+
+Yes, because the value is determined using attributes specific to its class.
+
+
+
+7) How does the design ensure that a sale cannot be registered without at least one product? At what point in the system should this rule be validated?
+
+With an if statement, it should be validated that there is at least one quantity of the product, and this validation should be done in the logical part of the sale class.
+
+
+
+
+8) How is the automatic inventory update reflected in the design when a sale is recorded? Which classes are involved in this operation?
+
+A quantity is subtracted from the purchased product, and the Sales and Products classes are involved.
+
+
+
+
+9) The system should be organized into four layers: model, persistence, services, and user interface. What type of classes belong to each layer? What criteria determine which layer a class should be placed in?
+
+The Model layer contains the classes that represent the system's main entities: Person, Customer, Salesperson, Product, Video Game, Console, and Sale. The Persistence layer contains the classes responsible for 
+storing and retrieving information using files. The Services layer contains the classes that implement and coordinate business rules and operations, such as sales registration, inventory validation, and stock 
+updates. Finally, the User Interface layer contains the classes that allow the user to interact with the system, such as menus, forms, and windows. The criteria for determining where to place a class is your responsibility.
+
+
+
+10) Why shouldn't the logic for saving and retrieving data from files be within domain classes? What problems arise when these responsibilities are mixed?
+
+The logic for saving and retrieving data should not be within domain classes because these classes should focus on representing the business entities and 
+rules. If a class like Product also handles files, responsibilities become mixed, increasing the coupling between the model and the storage method. This 
+makes maintenance, reuse, and future changes, such as migrating from files to a database, more difficult.
+
+
+
+11) What dependencies are allowed between layers and which are prohibited? Justify the reasoning behind the allowed dependencies.
+
+The User Interface can depend on Services; Services can depend on the Model and Persistence; and Persistence can depend on the 
+Model. These restrictions allow for the separation of responsibilities: the interface handles user interaction, services handle 
+business logic, the model represents entities, and persistence manages storage. In this way, a change in one layer affects the others as little as possible.
+
