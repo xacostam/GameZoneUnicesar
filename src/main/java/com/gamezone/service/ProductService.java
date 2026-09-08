@@ -236,4 +236,55 @@ public class ProductService {
     public void loadProducts() {
         products = productPersistence.loadProducts();
     }
+    
+    private boolean validateCommonData(
+            String id,
+            String title,
+            double price,
+            int quantity) {
+
+        if (isEmpty(id)) {
+
+            System.out.println(
+                    "Product ID is required."
+            );
+
+            return false;
+        }
+
+        if (isEmpty(title)) {
+
+            System.out.println(
+                    "Product title is required."
+            );
+
+            return false;
+        }
+
+        if (price <= 0) {
+
+            System.out.println(
+                    "Product price must be greater than zero."
+            );
+
+            return false;
+        }
+
+        if (quantity < 0) {
+
+            System.out.println(
+                    "Product quantity cannot be negative."
+            );
+
+            return false;
+        }
+
+        return true;
+    }
+
+
+    private boolean isEmpty(String Value) {
+
+        return Value == null || Value.trim().isEmpty();
+    }
 }
