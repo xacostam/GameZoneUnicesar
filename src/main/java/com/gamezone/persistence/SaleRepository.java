@@ -8,6 +8,6 @@ package com.gamezone.persistence;
  *
  * @author User
  */
-public class NewClass {
+public class SaleRepository {
     
 }
